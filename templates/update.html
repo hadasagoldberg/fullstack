@@ -1,8 +1,52 @@
-<form action="/update/{{contact.id}}" method="POST">
-    <input type="text" name="nombre" placeholder="Escribe tu nombre" value="{{contact.nombre}}"/>
-    <input type="text" name="apellido" placeholder="Escribe tu apellido" value="{{contact.apellido}}"/>
-    <input type="text" name="mail" placeholder="Escribe tu mail" value="{{contact.mail}}"/>
-    <input type="text" name="telefono" placeholder="Escribe tu telefono" value="{{contact.telefono}}"/>
+{% extends "layout.html" %} 
 
-    <button>Save</button>
-</form>
+{% block content %}
+
+<div class="col-md-4 offset-md-4">
+  <div class="card card-body bg-dark text-white">
+    <h1>Update</h1>
+
+    <form action="{{url_for('contacts.update', id=contact.id)}}" method="POST">
+      <div class="mb-3">
+        <label for="nombre">Escribe tu nombre:</label>
+        <input
+          type="text"
+          name="nombre"
+          value="{{contact.nombre}}"
+          class="form-control bg-dark text-white rounded-0"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="apellido">Escribe tu apellido:</label>
+        <input
+          type="text"
+          name="apellido"
+          value="{{contact.apellido}}"
+          class="form-control bg-dark text-white rounded-0"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="mail">Escribe tu mail:</label>
+        <input
+          type="email"
+          name="mail"
+          value="{{contact.mail}}"
+          class="form-control bg-dark text-white rounded-0"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="phone">Escribe tu telefono:</label>
+        <input
+          type="tel"
+          name="telefono"
+          value="{{contact.telefono}}"
+          class="form-control bg-dark text-white rounded-0"
+        />
+      </div>
+
+      <button class="btn btn-primary">Update</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

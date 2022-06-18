@@ -28,10 +28,10 @@ def new():
 def update(id):
     contact = Contact.query.get(id)
     if request.method == 'POST':
-        contact.nombre = request.form["nombre"]
-        contact.apellido = request.form["apellido"]
-        contact.mail = request.form["mail"]
-        contact.telefono = request.form["telefono"]
+        contact.nombre = request.form['nombre']
+        contact.apellido = request.form['apellido']
+        contact.mail = request.form['mail']
+        contact.telefono = request.form['telefono']
 
         db.session.commit()
 

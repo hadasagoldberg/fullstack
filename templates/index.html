@@ -1,24 +1,80 @@
-<form action="/new" method="POST">
-    <input type="text" name="nombre" placeholder="Escribe tu nombre"/>
-    <input type="text" name="apellido" placeholder="Escribe tu apellido"/>
-    <input type="text" name="mail" placeholder="Escribe tu mail"/>
-    <input type="text" name="telefono" placeholder="Escribe tu telefono"/>
+{% extends 'layout.html' %}
 
-    <button>Save</button>
-</form>
+{% block content %}
 
+<div class="row">
 
+    <div class="col-md-5">
+        <form action="/new" method="POST" class="card bg-dark text-light">
+            <div class="card-body p-4">
+                    <div class="mb-3">
+                        <label for="nombre">Escribe tu nombre:</label>
+                        <input
+                        type="text"
+                        name="nombre"
+                        class="form-control rounded-0 bg-dark border-0 text-white"
+                        placeholder="Escribe tu nombre"
+                        autofocus
+                        />
+                    </div>
 
-<div>
-    {% for contact in contacts %}
-        <div>
-            <h5>{{contact.nombre}} {{contact.apellido}}</h5>
-            <div>
-                <a href="{{url_for('contacts.update', id=contact.id)}}">Update</a>
-                <a href="{{url_for('contacts.delete', id=contact.id)}}">Delete</a>
+                    <div class="mb-3">
+                        <label for="apellido">Escribe tu apellido:</label>
+                        <input
+                        type="text"
+                        name="apellido"
+                        class="form-control rounded-0 bg-dark border-0 text-white"
+                        placeholder="Escribe tu apellido"
+                        autofocus
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="mail">Escribe tu mail:</label>
+                        <input
+                          type="text"
+                          name="mail"
+                          class="form-control rounded-0 bg-dark border-0 text-white"
+                          placeholder="Write your mail"
+                          required
+                        />
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="telefono">Escribe tu telefono:</label>
+                        <input
+                          type="text"
+                          name="telefono"
+                          class="form-control rounded-0 bg-dark border-0 text-white"
+                          placeholder="+1123123123"
+                        />
+                      </div>
+            
+                <button>Save</button>
             </div>
-            <p>{{contact.mail}}</p>
-            <p>{{contact.telefono}}</p>
-        </div>
-    {% endfor %}
+        </form>
+    </div>
+
+    <div class="col-md-7">
+        {% for contact in contacts %}
+          <div class="card mb-1 bg-black text-white">
+            <div class="card-body py-2 px-3">
+              <div class="d-flex justify-content-between">
+                <h5 class="card-title h6">{{contact.nombre}}{{ contact.apellido}}</h5>
+                <div>
+                  <a href="{{ url_for('contacts.update', id=contact.id) }}" class="btn btn-dark btn-sm rounded-0">Update</a>
+                  <a href="{{ url_for('contacts.delete', id=contact.id) }}" class="btn btn-danger btn-sm rounded-0">Delete</a>
+                </div>
+              </div>
+              <p class="card-text">{{ contact.mail }}</p>
+              <p class="card-text">{{ contact.telefono }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+      </div>
+
 </div>
+
+{% endblock %}

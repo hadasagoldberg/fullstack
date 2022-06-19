@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="col-md-4 offset-md-4">
-  <div class="card card-body bg-dark text-white">
+  <div class="card card-body bg-white text-dark">
     <h1>Update</h1>
 
     <form action="{{url_for('contacts.update', id=contact.id)}}" method="POST">
@@ -13,7 +13,8 @@
           type="text"
           name="nombre"
           value="{{contact.nombre}}"
-          class="form-control bg-dark text-white rounded-0"
+          class="form-control rounded-0 bg-light border-0 text-dark"
+          placeholder="Escribe tu nombre"
         />
       </div>
       <div class="mb-3">
@@ -22,7 +23,8 @@
           type="text"
           name="apellido"
           value="{{contact.apellido}}"
-          class="form-control bg-dark text-white rounded-0"
+          class="form-control rounded-0 bg-light border-0 text-dark"
+          placeholder="Escribe tu apellido"
         />
       </div>
       <div class="mb-3">
@@ -31,7 +33,8 @@
           type="email"
           name="mail"
           value="{{contact.mail}}"
-          class="form-control bg-dark text-white rounded-0"
+          class="form-control rounded-0 bg-light border-0 text-dark"
+          placeholder="Escribe tu mail"
         />
       </div>
       <div class="mb-3">
@@ -40,7 +43,8 @@
           type="tel"
           name="telefono"
           value="{{contact.telefono}}"
-          class="form-control bg-dark text-white rounded-0"
+          class="form-control rounded-0 bg-light border-0 text-dark"
+          placeholder="+1123123123"
         />
       </div>
 

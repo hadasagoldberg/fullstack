@@ -7,9 +7,11 @@ class Contact(db.Model):
     apellido = db.Column(db.String(30))
     mail = db.Column(db.String(60))
     telefono = db.Column(db.String(15))
+    pais = db.Column(db.String(20))
 
-    def __init__(self, nombre, apellido, mail, telefono):
+    def __init__(self, nombre, apellido, mail, telefono,pais):
         self.nombre = nombre
         self.apellido = apellido
         self.mail = mail
         self.telefono = telefono
+        self.pais = pais

@@ -15,8 +15,9 @@ def new():
     apellido = request.form['apellido']
     mail = request.form['mail']
     telefono = request.form['telefono']
+    pais = request.form['pais']
 
-    new_contact = Contact(nombre, apellido, mail, telefono)
+    new_contact = Contact(nombre, apellido, mail, telefono,pais)
     db.session.add(new_contact)
     db.session.commit()
 
@@ -32,7 +33,8 @@ def update(id):
         contact.apellido = request.form['apellido']
         contact.mail = request.form['mail']
         contact.telefono = request.form['telefono']
-
+        contact.pais = request.form['pais']
+        
         db.session.commit()
 
         return redirect('/')

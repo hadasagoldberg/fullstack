@@ -32,21 +32,30 @@ def new():
     mail = request.form['mail']
     telefono = request.form['telefono']
     pais = request.form['pais']
-    dia = request.form['dia']
-    hora = request.form['hora']
-    forma_contacto = request.form['forma_contacto']
+
 
     new_contact = Contact(nombre, apellido, mail, telefono,pais)
     db.session.add(new_contact)
     
+    
+    db.session.commit()
+   
+    return  redirect('/')
+
+@contacts.route('/contactar/<id>')
+def contactar():
+    contact = Contact.query.get(id)
+    dia = request.form['dia']
+    hora = request.form['hora']
+    forma_contacto = request.form['forma_contacto']
 
     new_contactar = Contactar(dia,hora,forma_contacto)
     db.session.add(new_contactar)
     
     db.session.commit()
    
-    return  redirect('/')
-    
+    return  redirect('/contactar.html')
+
 
 @contacts.route('/update/<id>', methods = ['GET', 'POST'])
 def update(id):

@@ -21,3 +21,15 @@ class Contact(db.Model):
             cantidad = consulta.cantidad,
             pais = consulta.pais
         )
+
+
+class Contactar(db.Model):
+    dia = db.Column(db.Integer, primary_key=True)
+    hora = db.Column(db.datetime.date(8))
+    forma_contacto = db.Column(db.String(30))
+
+    def __init__(self,dia,hora,forma_contacto):
+        self.dia = dia
+        self.hora = hora
+        self.forma_contacto = forma_contacto
+

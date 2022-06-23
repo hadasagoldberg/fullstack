@@ -1,12 +1,17 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+from fullstack.models.contacts import Contactar
 from models.contacts import Contact
 from utils.db import db
 from sqlalchemy import func, distinct,select
-from flask_marshmallow import Marshmallow
+#from flask_marshmallow import Marshmallow
+
 
 contacts = Blueprint('contacts', __name__)
 
+"""
+
 ma = Marshmallow(contacts)
+
 
 class ContactsSchema(ma.Schema):
     class Meta:
@@ -14,7 +19,7 @@ class ContactsSchema(ma.Schema):
 
 contacts_schema = ContactsSchema()
 contacts_schema = ContactsSchema(many = True)
-
+"""
 @contacts.route('/')
 def home():
     contacts = Contact.query.all()
@@ -27,11 +32,18 @@ def new():
     mail = request.form['mail']
     telefono = request.form['telefono']
     pais = request.form['pais']
+    dia = request.form['dia']
+    hora = request.form['hora']
+    forma_contacto = request.form['forma_contacto']
 
     new_contact = Contact(nombre, apellido, mail, telefono,pais)
     db.session.add(new_contact)
-    db.session.commit()
+    
 
+    new_contactar = Contactar(dia,hora,forma_contacto)
+    db.session.add(new_contactar)
+    
+    db.session.commit()
    
     return  redirect('/')
     

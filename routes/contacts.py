@@ -1,8 +1,19 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from models.contacts import Contact
 from utils.db import db
+from sqlalchemy import func, distinct,select
+from flask_marshmallow import Marshmallow
 
 contacts = Blueprint('contacts', __name__)
+
+ma = Marshmallow(contacts)
+
+class ContactsSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'nombre', 'apellido', 'mail', 'telefono', 'pais')
+
+contacts_schema = ContactsSchema()
+contacts_schema = ContactsSchema(many = True)
 
 @contacts.route('/')
 def home():
@@ -49,3 +60,11 @@ def delete(id):
     db.session.commit()
     
     return redirect('/')
+
+@contacts.route('/reporte')
+def reporte():
+    #reporte = db.session.query(func.count(distinct(Contact.pais)))
+    #print(reporte)
+    stmt = select([func.count(distinct(Contact.mail)), Contact.pais]).group_by(Contact.pais)
+    consulta = db.session.execute(stmt).fetchall()
+    return f"<p>Se muestra la cantidad de contactos de cada pais: {consulta}</p>"

@@ -5,7 +5,7 @@ class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(30))
     apellido = db.Column(db.String(30))
-    mail = db.Column(db.String(60))
+    mail = db.Column(db.String(60), unique = True)
     telefono = db.Column(db.String(15))
     pais = db.Column(db.String(20))
 
@@ -15,3 +15,9 @@ class Contact(db.Model):
         self.mail = mail
         self.telefono = telefono
         self.pais = pais
+
+    def to_json(consulta):
+        return dict(
+            cantidad = consulta.cantidad,
+            pais = consulta.pais
+        )
